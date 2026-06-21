@@ -13,10 +13,15 @@ class ShowController extends Controller
     public function index()
     {
         $search = request('search');
+        $sort = request('sort');
 
         $shows = Show::when($search, function ($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%');
-        })->get();
+                return $query->where('title', 'like', '%' . $search . '%');
+            })
+            ->when($sort, function ($query, $sort) {
+                return $query->orderBy($sort);
+            })
+            ->get();
 
         return view('shows.index', compact('shows'));
     }
@@ -42,7 +47,7 @@ class ShowController extends Controller
      */
     public function show(Show $show)
     {
-        //
+        return view('shows.show', compact('show'));
     }
 
     /**
@@ -50,7 +55,7 @@ class ShowController extends Controller
      */
     public function edit(Show $show)
     {
-        //
+         //
     }
 
     /**

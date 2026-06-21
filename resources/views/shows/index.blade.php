@@ -12,9 +12,17 @@
     <button type="submit">Rechercher</button>
 </form>
 
+<a href="/shows?sort=title">Trier par titre</a>
+
+<a href="/shows?sort=price">Trier par prix</a>
+
 @foreach($shows as $show)
 
-    <h2>{{ $show->title }}</h2>
+    <h2>
+            <a href="/shows/{{ $show->id }}">
+                 {{ $show->title }}
+    </a>
+    </h2>
 
     <p>{{ $show->description }}</p>
 

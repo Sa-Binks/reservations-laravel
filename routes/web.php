@@ -10,6 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/reserve/{show}', function ($showId) {
 
     Reservation::create([
@@ -41,5 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/shows', [ShowController::class, 'index'])->name('shows.index');
 });
+
+Route::get('/shows/{show}', [ShowController::class, 'show'])
+    ->name('shows.show');
 
 require __DIR__.'/auth.php';
