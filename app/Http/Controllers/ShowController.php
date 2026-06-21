@@ -12,7 +12,11 @@ class ShowController extends Controller
      */
     public function index()
     {
-        $shows = Show::all();
+        $search = request('search');
+
+        $shows = Show::when($search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%');
+        })->get();
 
         return view('shows.index', compact('shows'));
     }
